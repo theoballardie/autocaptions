@@ -237,8 +237,10 @@ function drawTimeline() {
   });
 }
 function current(t) { return cues.findIndex(c => t >= c.start + offset && t < c.end + offset); }
+function hasVideo() { return video.readyState > 0 && !video.error; }
+function prompt(message) { const d = $("drop"); d.innerHTML = message; d.style.display = message ? "flex" : "none"; }
 function tick() {
-  const t = video.currentTime, i = current(t);
+  const t = video.currentTime, i = hasVideo() ? current(t) : -1;
   const box = $("caption"); box.innerHTML = "";
   if (i >= 0) { const s = document.createElement("span"); s.textContent = cues[i].lines.join("\n"); box.appendChild(s); }
   $("time").textContent = fmt(t) + (i >= 0 ? "   #" + (i + 1) : "");
@@ -261,8 +263,11 @@ function download() {
   a.download = (DATA.title.replace(/\.[^.]+$/, "") || "captions") + (offset ? "-shifted" : "") + ".srt";
   a.click();
 }
-function loadVideo(file) { video.src = URL.createObjectURL(file); $("title").textContent = file.name; $("drop").style.display = "none"; }
-function loadCaptions(file) { file.text().then(t => { cues = parseCaptions(t); offset = 0; nudge(0); }); }
+function loadVideo(file) { video.src = URL.createObjectURL(file); $("title").textContent = file.name; prompt(""); }
+function loadCaptions(file) {
+  file.text().then(t => { cues = parseCaptions(t); offset = 0; nudge(0); if (!hasVideo()) prompt(NEED_VIDEO); });
+}
+const NEED_VIDEO = "Captions loaded. Now add the video:<br>drop it here or use Open video.";
 
 Object.keys(DATA.profiles).forEach(k => {
   const o = document.createElement("option"); o.value = k; o.textContent = k; $("profile").appendChild(o);
@@ -272,7 +277,8 @@ $("profile").onchange = (e) => { profile = DATA.profiles[e.target.value]; render
 $("onlyIssues").onchange = render;
 $("play").onclick = () => video.paused ? video.play() : video.pause();
 video.onplay = () => $("play").textContent = "Pause"; video.onpause = () => $("play").textContent = "Play";
-video.onloadedmetadata = drawTimeline;
+video.onloadedmetadata = () => { prompt(""); drawTimeline(); };
+video.onerror = () => prompt("This video could not be played here.<br>Use Open video to choose it, or drop it in.");
 $("prev").onclick = () => jump(-1); $("next").onclick = () => jump(1);
 document.querySelectorAll("[data-nudge]").forEach(b => b.onclick = () => nudge(+b.dataset.nudge));
 $("save").onclick = download;
@@ -293,7 +299,8 @@ document.addEventListener("keydown", (e) => {
   else if (e.key === "[" || e.key === "{") nudge(e.shiftKey ? -1 : -0.1);
   else if (e.key === "]" || e.key === "}") nudge(e.shiftKey ? 1 : 0.1);
 });
-if (DATA.video) { video.src = DATA.video; $("drop").style.display = "none"; $("title").textContent = DATA.title; }
+if (DATA.video) { video.src = DATA.video; $("title").textContent = DATA.title; prompt(""); }
+else if (cues.length) prompt(NEED_VIDEO);
 render(); tick();
 </script>
 </body>
