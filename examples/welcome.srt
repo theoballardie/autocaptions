@@ -1,0 +1,22 @@
+1
+00:00:00,480 --> 00:00:02,160
+Welcome to this short guide.
+
+2
+00:00:02,480 --> 00:00:06,858
+In the next few minutes, you will
+learn how to set up your first project,
+
+3
+00:00:06,942 --> 00:00:09,222
+invite your team, and share your work.
+
+4
+00:00:09,542 --> 00:00:12,661
+Most people are up
+and running in under ten minutes.
+
+5
+00:00:12,981 --> 00:00:17,480
+If you get stuck, the help centre has
+answers to the most common questions.

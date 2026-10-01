@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "captionkit"
+version = "0.1.0"
+description = "Build, check and preview SRT and WebVTT captions, from a script or straight from the audio."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Theo Ballardie" }]
+keywords = ["captions", "subtitles", "srt", "webvtt", "accessibility", "whisper"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Environment :: Console",
+  "Topic :: Multimedia :: Video",
+  "Intended Audience :: Developers",
+]
+dependencies = []
+
+[project.optional-dependencies]
+audio = ["faster-whisper>=1.0"]
+dev = ["pytest>=8"]
+
+[project.scripts]
+captionkit = "captionkit.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+captionkit = ["fonts/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
