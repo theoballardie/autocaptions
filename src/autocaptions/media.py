@@ -34,7 +34,7 @@ def duration(path: str) -> float:
         pass
     ffmpeg = _ffmpeg()
     if not ffmpeg:
-        raise SystemExit('reading durations needs ffmpeg, ffprobe or the audio extra: pip install "captionkit[audio]"')
+        raise SystemExit('reading durations needs ffmpeg, ffprobe or the audio extra: pip install "autocaptions[audio]"')
     err = subprocess.run([ffmpeg, "-hide_banner", "-i", path], capture_output=True, text=True).stderr
     match = re.search(r"Duration:\s*(\d+):(\d+):(\d+(?:\.\d+)?)", err)
     if not match:

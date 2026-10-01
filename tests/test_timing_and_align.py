@@ -1,9 +1,9 @@
 import pytest
 
-from captionkit import build
-from captionkit.align import Word, align
-from captionkit.lint import check
-from captionkit.standards import get
+from autocaptions import build
+from autocaptions.align import Word, align
+from autocaptions.lint import check
+from autocaptions.standards import get
 
 SCRIPT = ("Welcome to this short guide. In the next few minutes you will learn how to set up a project, "
           "who to invite, and what happens next. Most people are up and running in under ten minutes.")

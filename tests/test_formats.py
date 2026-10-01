@@ -1,7 +1,7 @@
 import pytest
 
-from captionkit.cues import Cue, format_time, parse_time
-from captionkit.formats import parse_srt, parse_vtt, to_srt, to_vtt
+from autocaptions.cues import Cue, format_time, parse_time
+from autocaptions.formats import parse_srt, parse_vtt, to_srt, to_vtt
 
 
 def test_timestamps_round_trip():

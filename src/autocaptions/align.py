@@ -9,7 +9,7 @@ This is the open-source equivalent of the two things YouTube does with sound:
   comes from the audio.
 
 Recognition uses faster-whisper (an implementation of OpenAI's Whisper),
-installed with ``pip install "captionkit[audio]"``. Models download on first
+installed with ``pip install "autocaptions[audio]"``. Models download on first
 use and run locally; no audio leaves the machine.
 """
 from __future__ import annotations
@@ -32,7 +32,7 @@ def transcribe(audio: str, model: str = "small.en", language: str | None = None)
     try:
         from faster_whisper import WhisperModel
     except ImportError:
-        raise SystemExit('audio features need faster-whisper: pip install "captionkit[audio]"') from None
+        raise SystemExit('audio features need faster-whisper: pip install "autocaptions[audio]"') from None
     recogniser = WhisperModel(model, device="auto", compute_type="auto")
     samples = load_audio(audio)
     segments, _ = recogniser.transcribe(samples, word_timestamps=True, language=language, vad_filter=True)

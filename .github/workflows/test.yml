@@ -20,4 +20,4 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: pip install -e ".[dev]"
       - run: pytest -q
-      - run: captionkit check examples/welcome.srt --script examples/welcome.txt --strict
+      - run: autocaptions check examples/welcome.srt --script examples/welcome.txt --strict

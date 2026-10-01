@@ -1,4 +1,4 @@
-from captionkit.text import layout, normalise, replace_dashes, sentences, split_into_cues, tokens
+from autocaptions.text import layout, normalise, replace_dashes, sentences, split_into_cues, tokens
 
 
 def test_sentences_ignore_abbreviations_and_initials():

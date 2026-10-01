@@ -1,8 +1,8 @@
-# captionkit
+# autocaptions
 
 Build, check and preview SRT and WebVTT captions, from a script or straight from the audio.
 
-captionkit turns a narration script into captions that read well, follow the voice and pass broadcast-style checks. It covers both of the jobs video platforms do with sound:
+autocaptions turns a narration script into captions that read well, follow the voice and pass broadcast-style checks. It covers both of the jobs video platforms do with sound:
 
 - **Auto-sync:** you supply the exact script and the recording, and every word is lined up with the moment it is spoken. The wording stays exactly as approved, and only the timing comes from the audio.
 - **Automatic captions:** with no script, speech recognition writes the words and times them.
@@ -15,15 +15,15 @@ Both run locally with [Whisper](https://github.com/openai/whisper), through [fas
 - **Three ways to time.** To the audio (`--audio`), across a known running time (`--duration`, `--media`), or per video from a JSON of durations for a script that covers several videos.
 - **Checks.** Line length, lines per caption, reading speed, minimum and maximum time on screen, gaps and overlaps. Optionally, it confirms the captions reproduce the script word for word, so a caption can never quietly reword an approved script.
 - **Fixes.** Repairs overlaps, gaps that are too small, captions that are too short and lines that are too long, without changing a word.
-- **Preview.** A single HTML page that plays the video with the captions over it, colours a timeline by problem, lists every caption with its reading speed, lets you nudge the timing in 0.1 second steps and downloads the corrected file. Drag any video and caption file onto it, or open it with `captionkit preview`.
+- **Preview.** A single HTML page that plays the video with the captions over it, colours a timeline by problem, lists every caption with its reading speed, lets you nudge the timing in 0.1 second steps and downloads the corrected file. Drag any video and caption file onto it, or open it with `autocaptions preview`.
 - **Scripts in plain text, Markdown or Word (.docx).** A script that covers several videos can be split at headings such as `Chapter 3 - Sharing your work`, with options to skip stage directions and stop before an appendix.
 - **SRT and WebVTT,** read and written, with conversion and time shifting.
 
 ## Install
 
 ```bash
-git clone https://github.com/theoballardie/captionkit.git
-cd captionkit
+git clone https://github.com/theoballardie/autocaptions.git
+cd autocaptions
 pip install -e .              # build, check, fix, convert, shift, preview
 pip install -e ".[audio]"     # adds speech recognition for --audio and transcribe
 ```
@@ -34,30 +34,30 @@ Python 3.10 or later. The audio extra downloads a Whisper model the first time i
 
 ```bash
 # captions timed to the recording (auto-sync)
-captionkit build script.docx --audio narration.mp4 -o narration.srt
+autocaptions build script.docx --audio narration.mp4 -o narration.srt
 
 # captions from the audio alone (automatic captions)
-captionkit transcribe narration.mp4 -o narration.srt
+autocaptions transcribe narration.mp4 -o narration.srt
 
 # no audio to hand: spread the script across the running time
-captionkit build script.txt --media narration.mp4 -o narration.srt
+autocaptions build script.txt --media narration.mp4 -o narration.srt
 
 # check against the style and the script, then open the preview
-captionkit check narration.srt --script script.docx
-captionkit preview narration.srt --video narration.mp4
+autocaptions check narration.srt --script script.docx
+autocaptions preview narration.srt --video narration.mp4
 ```
 
 ### A script that covers several videos
 
 ```bash
-captionkit build series.docx \
+autocaptions build series.docx \
   --split '^Chapter (\d+)\s*-\s*(.*)$' \
   --durations durations.json \
   --out-dir captions --name 'chapter{n}.srt' \
   --caps-headings --skip '^\[.*\]$' --stop-at '^Appendix'
 ```
 
-Each heading starts a new video, and `{n}` is the number it captures. `durations.json` maps those numbers to seconds, and `captionkit duration *.mp4` prints one for you.
+Each heading starts a new video, and `{n}` is the number it captures. `durations.json` maps those numbers to seconds, and `autocaptions duration *.mp4` prints one for you.
 
 ## Style profiles
 
@@ -91,7 +91,7 @@ pytest
 
 ## Credits
 
-Written by Theo Ballardie. The preview page uses [Manrope](https://github.com/googlefonts/manrope) by The Manrope Project Authors, under the SIL Open Font License 1.1 (see `src/captionkit/fonts/OFL.txt`).
+Written by Theo Ballardie. The preview page uses [Manrope](https://github.com/googlefonts/manrope) by The Manrope Project Authors, under the SIL Open Font License 1.1 (see `src/autocaptions/fonts/OFL.txt`).
 
 ## Licence
 

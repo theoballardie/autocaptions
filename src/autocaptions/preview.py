@@ -28,7 +28,7 @@ def _font_faces() -> str:
     """Manrope, embedded so the page looks the same offline (SIL Open Font License, see fonts/OFL.txt)."""
     faces = []
     for weight in (400, 600, 700):
-        data = resources.files("captionkit").joinpath(f"fonts/Manrope-{weight}.woff2").read_bytes()
+        data = resources.files("autocaptions").joinpath(f"fonts/Manrope-{weight}.woff2").read_bytes()
         faces.append("@font-face { font-family: Manrope; font-weight: %d; font-style: normal; font-display: swap; "
                      "src: url(data:font/woff2;base64,%s) format('woff2'); }" % (weight, base64.b64encode(data).decode()))
     return "\n".join(faces)

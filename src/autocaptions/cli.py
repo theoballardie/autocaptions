@@ -1,4 +1,4 @@
-"""captionkit command line."""
+"""autocaptions command line."""
 from __future__ import annotations
 
 import argparse
@@ -159,8 +159,8 @@ def cmd_duration(a: argparse.Namespace) -> int:
 
 
 def parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(prog="captionkit", description="Build, check and preview SRT and WebVTT captions.")
-    p.add_argument("--version", action="version", version=f"captionkit {__version__}")
+    p = argparse.ArgumentParser(prog="autocaptions", description="Build, check and preview SRT and WebVTT captions.")
+    p.add_argument("--version", action="version", version=f"autocaptions {__version__}")
     sub = p.add_subparsers(dest="command", required=True)
     profiles = list(standards.PROFILES)
 

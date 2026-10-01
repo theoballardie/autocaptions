@@ -1,7 +1,7 @@
-from captionkit.cues import Cue
-from captionkit.fix import fix, shift
-from captionkit.lint import check, compare_to_script
-from captionkit.standards import get
+from autocaptions.cues import Cue
+from autocaptions.fix import fix, shift
+from autocaptions.lint import check, compare_to_script
+from autocaptions.standards import get
 
 P = get("broadcast")
 

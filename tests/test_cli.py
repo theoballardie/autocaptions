@@ -1,9 +1,9 @@
 import json
 import zipfile
 
-from captionkit import formats
-from captionkit.cli import main
-from captionkit.transcript import read_paragraphs, split_sections
+from autocaptions import formats
+from autocaptions.cli import main
+from autocaptions.transcript import read_paragraphs, split_sections
 
 SCRIPT = ("Welcome to this short guide. In the next few minutes you will learn how to set up a project, "
           "who to invite, and what happens next.")
