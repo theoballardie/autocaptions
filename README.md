@@ -22,6 +22,8 @@ Both run locally with [Whisper](https://github.com/openai/whisper), through [fas
 ## Install
 
 ```bash
+git clone https://github.com/theoballardie/captionkit.git
+cd captionkit
 pip install -e .              # build, check, fix, convert, shift, preview
 pip install -e ".[audio]"     # adds speech recognition for --audio and transcribe
 ```
